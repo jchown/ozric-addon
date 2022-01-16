@@ -3,7 +3,7 @@ name: Ozric
 version: "0.1.1"
 slug: ozric
 description: Example add-on
-#url: "https://github.com/jchown/ozric/tree/master/OzricAddon"
+#url: "https://github.com/jchown/ozric-addon/tree/master/OzricAddon"
 arch:
   - armhf
   - armv7
