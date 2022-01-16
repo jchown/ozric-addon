@@ -6,7 +6,7 @@ ARG BUILD_ARCH
 #   Choose right Microsoft build image for architecture
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1-bullseye AS dotnet-builder-amd64
-FROM mcr.microsoft.com/dotnet/sdk:3.1-bullseye-arm64v AS dotnet-builder-aarch64
+FROM mcr.microsoft.com/dotnet/sdk:3.1-bullseye-arm64v8 AS dotnet-builder-aarch64
 FROM mcr.microsoft.com/dotnet/sdk:3.1-bullseye-arm32v7 AS dotnet-builder-armhf
 FROM mcr.microsoft.com/dotnet/sdk:3.1-bullseye-arm32v7 AS dotnet-builder-armv7
 
