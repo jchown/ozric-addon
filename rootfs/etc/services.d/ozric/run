@@ -13,4 +13,4 @@ ls -al /ozric
 ls -al /ozric/OzricDeployTest
 
 ## Run your program
-exec /ozric/OzricDeployTest
+/ozric/OzricDeployTest
