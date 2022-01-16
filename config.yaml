@@ -1,8 +1,8 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Ozric
-version: "0.1.1"
+version: "0.1.2"
 slug: ozric
-description: Example add-on
+description: Ozric graph-based automation
 #url: "https://github.com/jchown/ozric-addon/tree/master/OzricAddon"
 arch:
   - armhf
