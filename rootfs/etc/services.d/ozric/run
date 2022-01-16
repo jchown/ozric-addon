@@ -9,5 +9,8 @@ message=$(bashio::config 'message')
 ## Print the message the user supplied, defaults to "Hello World..."
 bashio::log.info "${message:="Hello World..."}"
 
+ls -al /ozric
+ls -al /ozric/OzricDeployTest
+
 ## Run your program
 exec /ozric/OzricDeployTest
