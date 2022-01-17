@@ -8,6 +8,9 @@ ARG BUILD_ARCH
 FROM mcr.microsoft.com/dotnet/sdk:3.1-bullseye AS dotnet-builder-amd64
 ENV runtime=linux-musl-x64
 
+FROM mcr.microsoft.com/dotnet/sdk:3.1-bullseye AS dotnet-builder-i386
+ENV runtime=linux-musl-x86
+
 FROM mcr.microsoft.com/dotnet/sdk:3.1-bullseye-arm64v8 AS dotnet-builder-aarch64
 ENV runtime=linux-musl-arm64
 
