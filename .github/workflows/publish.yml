@@ -20,4 +20,4 @@ jobs:
           args: |
             --all \
             --target . \
-            --docker-hub jchown
+            --docker-hub jchown/ozric
