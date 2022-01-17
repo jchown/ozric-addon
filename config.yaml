@@ -18,4 +18,4 @@ schema:
   logging: list(Error|Warning|Info|Debug|Trace)
   graph: str
 homeassistant_api: true
-#image: "github.com/jchown/ozric"
+image: "github.com/jchown/ozric"
