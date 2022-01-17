@@ -14,7 +14,7 @@ FROM mcr.microsoft.com/dotnet/sdk:3.1-bullseye-arm32v7 AS dotnet-builder-armv7
 
 FROM dotnet-builder-${BUILD_ARCH} AS dotnet-builder
 COPY OzricDeployTest /src
-RUN dotnet publish -c Release /src/OzricDeployTest.csproj -o "/ozric"
+RUN dotnet publish -c Release /src/OzricDeployTest.csproj -r linux-arm64 -o "/ozric"
 
 #   Build the final image
 
