@@ -5,11 +5,10 @@ slug: ozric
 description: Ozric graph-based automation
 url: "https://github.com/jchown/ozric-addon/tree/master/OzricAddon"
 arch:
-  - armhf
   - armv7
   - aarch64
   - amd64
-  - i386
+#  - i386   (not supported by dotnet, see https://docs.microsoft.com/en-us/dotnet/core/rid-catalog)
 #init: false
 options:
   logging: "Info"
