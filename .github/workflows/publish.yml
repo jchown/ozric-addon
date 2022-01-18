@@ -9,6 +9,7 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
+        submodules: 'true'
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
