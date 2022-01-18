@@ -23,9 +23,9 @@ ENV runtime=linux-musl-arm
 #   Use it to build our project
 
 FROM dotnet-builder-${BUILD_ARCH} AS dotnet-builder
-COPY OzricDeployTest /src
-RUN dotnet restore /src/OzricDeployTest.csproj
-RUN dotnet publish -c Release /src/OzricDeployTest.csproj -r ${runtime} --self-contained true -o "/ozric"
+COPY Ozric /src
+RUN dotnet restore /src/OzricAddon/OzricAddon.csproj
+RUN dotnet publish -c Release /src/OzricAddon/OzricAddon.csproj -r ${runtime} --self-contained true -o "/ozric"
 
 #   Build the final image
 

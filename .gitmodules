@@ -1,0 +1,3 @@
+[submodule "Ozric"]
+	path = Ozric
+	url = https://github.com/jchown/ozric
