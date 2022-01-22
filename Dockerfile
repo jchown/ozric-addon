@@ -36,3 +36,5 @@ RUN apk add --no-cache \
 
 COPY rootfs /
 COPY --from=dotnet-builder /ozric /ozric
+
+EXPOSE 8099
