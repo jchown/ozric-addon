@@ -22,7 +22,6 @@ ENV runtime=linux-musl-arm
 
 FROM dotnet-builder-${BUILD_ARCH} AS dotnet-builder
 COPY Ozric /src
-RUN dotnet restore /src/OzricService/OzricService.csproj
 RUN dotnet publish -c Release /src/OzricService/OzricService.csproj -r ${runtime} --self-contained true -o "/ozric"
 
 #   Build the final image, base image as specified by Home Assistant's builder

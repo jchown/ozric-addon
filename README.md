@@ -14,7 +14,7 @@ based on (say) the time of day or other modal changes within your home.
 
 Go to the Add Ons repository in your Home Assistant [Add-On Dashboard](http://homeassistant:8123/hassio/dashboard) and click on the link at the bottom right to go to the Add On Store.
 
-From there add the URL [https://github.com/jchown/ozric-addon](https://github.com/jchown/ozric-addon). The add-on will then be available to install in the main Add-On Dashboard.
+From there click "Repositories" in the top right and add the URL [https://github.com/jchown/ozric-addon](https://github.com/jchown/ozric-addon). The add-on will then be available to install in the main Add-On Dashboard.
 
 ## How It Works
 
