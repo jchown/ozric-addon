@@ -1,6 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Ozric
-version: "0.6.9"
+version: "0.6.10"
 slug: ozric
 description: Continuous graph-based automation engine
 url: "https://github.com/jchown/ozric-addon/tree/master/OzricAddon"
