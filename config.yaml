@@ -14,7 +14,6 @@ options:
   logging: "Info"
 schema:
   logging: list(Error|Warning|Info|Debug|Trace)
-  token: str
 homeassistant_api: true
 ingress: true
 image: "jchown/{arch}-ozric-addon"
