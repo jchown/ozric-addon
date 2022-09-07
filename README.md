@@ -7,8 +7,7 @@ This is an "add on" for [Home Assistant](https://www.home-assistant.io/).
 By continuously monitoring the states of your various sensors, switches and the environment, Ozric can turn on and off your lights in a very customisable and reactive way.
 This logic is customisable and described by a graph, which you (will be able to) edit visually.
 
-For example, you can have a light that is automatically switched on & off by a sensor. This is HA 101. But Ozric also allows you define the exact colour for the "on" state
-based on (say) the time of day or other modal changes within your home.
+This is very similar to [Node Red](https://nodered.org/), but Ozric is not message-oriented. Instead it is continuously evaluated and responds to internal (computed) state changes as well as sensor changes.
 
 ## How To Install It
 
