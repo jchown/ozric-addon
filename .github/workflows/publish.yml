@@ -22,5 +22,4 @@ jobs:
           args: |
             --all \
             --target . \
-            --docker-hub jchown \
-            --addon
+            --docker-hub jchown
