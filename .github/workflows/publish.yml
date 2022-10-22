@@ -20,6 +20,6 @@ jobs:
         uses: home-assistant/builder@2022.03.1
         with:
           args: |
-            --all \
+            --amd64 \
             --target . \
             --docker-hub jchown
