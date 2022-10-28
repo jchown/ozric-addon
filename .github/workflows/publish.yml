@@ -17,17 +17,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Publish x64
-        uses: home-assistant/builder
+        uses: home-assistant/builder@master
         with:
           args: |
             --amd64 \
             --target . \
             --docker-hub jchown
       - name: Publish AARCH64
-        uses: home-assistant/builder
+        uses: home-assistant/builder@master
         with:
           args: |
             --aarch64 \
             --target . \
             --docker-hub jchown
-
