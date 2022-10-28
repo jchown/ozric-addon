@@ -16,10 +16,17 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Publish
+      - name: Publish x64
         uses: jchown/ha-builder
         with:
           args: |
-            --all \
+            --amd64 \
+            --target . \
+            --docker-hub jchown
+      - name: Publish AARCH64
+        uses: jchown/ha-builder
+        with:
+          args: |
+            --aarch64 \
             --target . \
             --docker-hub jchown
