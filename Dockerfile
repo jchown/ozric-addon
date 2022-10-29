@@ -8,8 +8,8 @@ ARG BUILD_ARCH
 FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS dotnet-builder-amd64
 ENV runtime=linux-musl-x64
 
-#FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS dotnet-builder-i386
-#ENV runtime=linux-musl-x86
+FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS dotnet-builder-i386
+ENV runtime=linux-musl-x86
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS dotnet-builder-aarch64
 ENV runtime=linux-musl-arm64
@@ -22,7 +22,7 @@ ENV runtime=linux-musl-arm
 
 FROM dotnet-builder-${BUILD_ARCH} AS dotnet-builder
 COPY Ozric /src
-RUN dotnet publish -c Release /src/OzricService/OzricService.csproj -r ${runtime} --self-contained true -o "/ozric"
+RUN dotnet publish -c Release -r ${runtime} --self-contained /src/OzricUI/OzricUI.csproj -o "/ozric"
 
 #   Build the final image, base image as specified by Home Assistant's builder
 
