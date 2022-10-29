@@ -30,10 +30,10 @@ jobs:
             --aarch64 \
             --target . \
             --docker-hub jchown
-      - name: Publish ARM v7
-        uses: home-assistant/builder@master
-        with:
-          args: |
-            --armv7 \
-            --target . \
-            --docker-hub jchown
+      # - name: Publish ARM v7
+      #   uses: home-assistant/builder@master
+      #   with:
+      #     args: |
+      #       --armv7 \
+      #       --target . \
+      #       --docker-hub jchown
