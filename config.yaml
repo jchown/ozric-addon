@@ -17,4 +17,8 @@ schema:
 homeassistant_api: true
 #ingress: true
 image: "jchown/{arch}-ozric-addon"
-webui: http://[HOST]:[PORT:8099]
+webui: http://[HOST]:[PORT:9098]
+ports:
+  9098/tcp: 9098
+
+
