@@ -1,6 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Ozric
-version: "0.8.3"
+version: "0.8.4"
 slug: ozric
 description: Continuous graph-based automation engine
 url: "https://github.com/jchown/ozric-addon/tree/master/OzricAddon"
@@ -9,7 +9,7 @@ arch:
   - aarch64
   - amd64
 # - i386   (not supported by dotnet, see https://docs.microsoft.com/en-us/dotnet/core/rid-catalog)
-#init: false
+init: false
 options:
   logging: "Info"
 schema:
@@ -17,4 +17,4 @@ schema:
 homeassistant_api: true
 ingress: true
 image: "jchown/{arch}-ozric-addon"
-init: false
+webui: http://[HOST]:[PORT:8099]/graph
