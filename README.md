@@ -18,6 +18,12 @@ the graph is continuously evaluated and responds to internal (computed) state ch
 
 ## Compatibility
 
+[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
+[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
+[armhf-shield]: https://img.shields.io/badge/armhf-no-green.svg
+[armv7-shield]: https://img.shields.io/badge/armv7-no-red.svg
+[i386-shield]: https://img.shields.io/badge/i386-no-red.svg
+
 Ozric is compatible with [HA OS](https://github.com/home-assistant/operating-system) or [HA Supervised](https://github.com/home-assistant/supervised-installer) installations - as these are built on [Docker](https://docker.com) - on 64-bit
 Intel/AMD platforms (AMD64) as well as 64-bit ARM (AArch64).
 
