@@ -24,8 +24,7 @@ the graph is continuously evaluated and responds to internal (computed) state ch
 [armv7-shield]: https://img.shields.io/badge/armv7-no-red.svg
 [i386-shield]: https://img.shields.io/badge/i386-no-red.svg
 
-Ozric is compatible with [HA OS](https://github.com/home-assistant/operating-system) or [HA Supervised](https://github.com/home-assistant/supervised-installer) installations - as these are built on [Docker](https://docker.com) - on 64-bit
-Intel/AMD platforms (AMD64) as well as 64-bit ARM (AArch64).
+Ozric is compatible with [HA OS](https://github.com/home-assistant/operating-system) or [HA Supervised](https://github.com/home-assistant/supervised-installer) installations - as these are built on [Docker](https://docker.com) - on 64-bit Intel/AMD platforms (AMD64) as well as 64-bit ARM (AArch64).
 
 ## How To Install It
 
@@ -33,3 +32,11 @@ Intel/AMD platforms (AMD64) as well as 64-bit ARM (AArch64).
 * Click on the link at the bottom right to go to the Add On Store.
 * From there click "Repositories" in the top right and add the URL [https://github.com/jchown/ozric-addon](https://github.com/jchown/ozric-addon).
 * The add-on will then be available to install in the main Add-On Dashboard.
+
+## Privacy & Telemetry
+
+This add on sends crash reports to [Sentry](https://sentry.io/). No other data should leave the container.
+
+## Development
+
+This is a C#/Blazor based application. The source code can be found [on Github](https://github.com/jchown).
