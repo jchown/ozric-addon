@@ -39,4 +39,4 @@ This add on sends crash reports to [Sentry](https://sentry.io/). No other data s
 
 ## Development
 
-This is a C#/Blazor based application. The source code can be found [on Github](https://github.com/jchown).
+This is a C#/Blazor based application. The source code can be found [on Github](https://github.com/jchown/ozric).

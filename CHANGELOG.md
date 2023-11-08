@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.10.1
+
+- Query Supervisor API
+
+## 0.10.0
+
+- Added Sentry IO
+- Fixed bug when handling light states with missing or null `brightness` field.
+
 ## 0.9.2
 
 - Added a changelog...
