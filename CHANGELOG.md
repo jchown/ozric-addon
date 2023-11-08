@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.2
+
+- Explicit slug
+
 ## 0.10.1
 
 - Query Supervisor API
