@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.4
+
+- Try using self not explicit slug
+
 ## 0.10.3
 
 - More supervisor info
