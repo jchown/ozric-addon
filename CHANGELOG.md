@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.6
+
+- Use supervisor API to prime /_blazor URL
+
 ## 0.10.5
 
 - Use alternate auth method for supervisor API
