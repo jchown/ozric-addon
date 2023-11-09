@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.7
+
+- Inject & show config
+
 ## 0.10.6
 
 - Use supervisor API to prime /_blazor URL
