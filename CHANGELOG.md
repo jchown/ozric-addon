@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.5
+
+- Use alternate auth method for supervisor API
+
 ## 0.10.4
 
 - Try using self not explicit slug
