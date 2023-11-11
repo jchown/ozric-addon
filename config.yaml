@@ -21,4 +21,3 @@ image: "jchown/{arch}-ozric-addon"
 ports:
   8099/tcp: 8099
 hassio_api: true
-hassio_role: default
