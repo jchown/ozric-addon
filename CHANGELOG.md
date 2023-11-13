@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.10.7
+## 0.10.7 - 0.10.13
 
-- Inject & show config
+- Fighting base URL issues
 
 ## 0.10.6
 
