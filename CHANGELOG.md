@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.15
+
+- Fix data upload
+
 ## 0.10.7 - 0.10.14
 
 - Fighting base URL issues
