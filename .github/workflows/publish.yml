@@ -18,7 +18,7 @@ jobs:
           echo "VERSION=$($yq e '.version' config.yaml)" >> $GITHUB_ENV
       - name: Prepare Dockerfile
         run: |
-          sed -i "s/ARG OZRIC_VERSION=.*/ARG OZRIC_VERSION=${{ env.VERSION }}/" Dockerfile
+          sed -i "s/ARG OZRIC_VERSION=.*/ARG OZRIC_VERSION=${{ env.VERSION }}.${{ github.run_id }}/" Dockerfile
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:

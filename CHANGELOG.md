@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.20 - 21
+
+- More _blazor wrangling
+
 ## 0.10.19
 
 - DRY versioning
