@@ -30,7 +30,7 @@ jobs:
             --amd64 \
             --target . \
             --docker-hub jchown \
-            --version ${{ steps.dotenv.outputs.version }}
+            --version ${{ env.VERSION }}
       - name: Publish AArch64
         uses: home-assistant/builder@master
         with:
@@ -38,7 +38,7 @@ jobs:
             --aarch64 \
             --target . \
             --docker-hub jchown \
-            --version ${{ steps.dotenv.outputs.version }}
+            --version ${{ env.VERSION }}
       # - name: Publish ARM v7
       #   uses: home-assistant/builder@master
       #   with:
@@ -46,3 +46,4 @@ jobs:
       #       --armv7 \
       #       --target . \
       #       --docker-hub jchown
+      #       --version ${{ env.VERSION }}
