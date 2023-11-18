@@ -1,11 +1,12 @@
 #   Arguments supplied by Home Assistant
 
-ARG BUILD_FROM   
+ARG BUILD_FROM
 ARG BUILD_ARCH
 
 #   Our own
 
 ARG OZRIC_VERSION="set by github action"
+RUN echo "Ozric version: ${OZRIC_VERSION}"
 
 #   Choose right Microsoft build image & runtime for architecture
 
