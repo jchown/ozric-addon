@@ -13,7 +13,7 @@ jobs:
           submodules: 'true'
       - name: Read version from config.yaml
         run: |
-          yq=docker run --rm -i -v "${PWD}:${PWD}" -w ${PWD} mikefarah/yq yq
+          yq="docker run --rm -i -v ${PWD}:${PWD} -w ${PWD} mikefarah/yq yq"
           echo "VERSION=$($yq e '.version' config.yaml)" >> $GITHUB_ENV
       - name: Prepare Dockerfile
         run: |
