@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.16
+
+- Investigating hub connection issue
+
 ## 0.10.15
 
 - Fix data upload
