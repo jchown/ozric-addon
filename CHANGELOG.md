@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.19
+
+- DRY versioning
+
 ## 0.10.16 - 18
 
 - Investigating hub connection issue

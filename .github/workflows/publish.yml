@@ -7,6 +7,12 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     steps:
+      - id: dotenv
+        name: Set variables
+        uses: falti/dotenv-action@v1
+      - name: Prepare Dockerfile
+        run: |
+          sed -i "s/ARG OZRIC_VERSION=.*/ARG OZRIC_VERSION=${{ steps.dotenv.outputs.version }}/" Dockerfile
       - name: Checkout the repository
         uses: actions/checkout@v3
         with:
@@ -22,14 +28,16 @@ jobs:
           args: |
             --amd64 \
             --target . \
-            --docker-hub jchown
+            --docker-hub jchown \
+            --version ${{ steps.dotenv.outputs.version }}
       - name: Publish AArch64
         uses: home-assistant/builder@master
         with:
           args: |
             --aarch64 \
             --target . \
-            --docker-hub jchown
+            --docker-hub jchown \
+            --version ${{ steps.dotenv.outputs.version }}
       # - name: Publish ARM v7
       #   uses: home-assistant/builder@master
       #   with:
