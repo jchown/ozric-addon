@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.10.16
+## 0.10.16 - 17
 
 - Investigating hub connection issue
 
@@ -8,7 +8,7 @@
 
 - Fix data upload
 
-## 0.10.7 - 0.10.14
+## 0.10.7 - 14
 
 - Fighting base URL issues
 
