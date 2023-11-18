@@ -6,7 +6,6 @@ ARG BUILD_ARCH
 #   Our own
 
 ARG OZRIC_VERSION="set by github action"
-RUN echo "Ozric version: ${OZRIC_VERSION}"
 
 #   Choose right Microsoft build image & runtime for architecture
 
@@ -27,6 +26,7 @@ ENV runtime=linux-musl-arm
 
 FROM dotnet-builder-${BUILD_ARCH} AS dotnet-builder
 COPY Ozric /src
+RUN echo "Ozric version: ${OZRIC_VERSION}"
 RUN dotnet publish -c Release -r ${runtime} --self-contained /src/OzricUI/OzricUI.csproj -o "/ozric" /property:Version=${OZRIC_VERSION}
 
 #   Build the final image, base image as specified by Home Assistant's builder
