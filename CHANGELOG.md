@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.10.20 - 21
+## 0.10.20 - 23
 
 - More _blazor wrangling
 
