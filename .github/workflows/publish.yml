@@ -7,6 +7,9 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     steps:
+      - name: Check workspace
+        run: |
+          ls -al
       - id: dotenv
         name: Set variables
         uses: falti/dotenv-action@v1
