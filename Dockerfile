@@ -3,10 +3,6 @@
 ARG BUILD_FROM
 ARG BUILD_ARCH
 
-#   Our own
-
-ARG OZRIC_VERSION="set by github action"
-
 #   Choose right Microsoft build image & runtime for architecture
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS dotnet-builder-amd64
@@ -25,6 +21,7 @@ ENV runtime=linux-musl-arm
 #   (with all dependencies, including dotnet runtime)
 
 FROM dotnet-builder-${BUILD_ARCH} AS dotnet-builder
+ARG OZRIC_VERSION="set by github action"
 COPY Ozric /src
 RUN echo "Ozric version: ${OZRIC_VERSION}"
 RUN dotnet publish -c Release -r ${runtime} --self-contained /src/OzricUI/OzricUI.csproj -o "/ozric" /property:Version=${OZRIC_VERSION}
