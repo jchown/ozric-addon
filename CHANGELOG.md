@@ -3,7 +3,6 @@
 ## 0.11.0
 
 - Removed HomeHub
-- Re-enable ARM v7
 
 ## 0.10.20 - 25
 
