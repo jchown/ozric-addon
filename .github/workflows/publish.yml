@@ -3,15 +3,16 @@ name: "Publish"
 on: push
 
 jobs:
-  publish:
-    name: Publish
+
+  publish-x64:
+    name: Publish AMD64
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
         with:
           submodules: 'true'
-      - name: Read version from config.yaml
+      - name: Read version
         run: |
           yq="docker run --rm -i -v ${PWD}:${PWD} -w ${PWD} mikefarah/yq"
           echo "VERSION=$($yq e '.version' config.yaml)"
@@ -24,7 +25,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Publish x64
+      - name: Publish
         uses: home-assistant/builder@master
         with:
           args: |
@@ -32,7 +33,29 @@ jobs:
             --target . \
             --docker-hub jchown \
             --version ${{ env.VERSION }}
-      - name: Publish AArch64
+
+  publish-arm64:
+    name: Publish AArch64
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+        with:
+          submodules: 'true'
+      - name: Read version
+        run: |
+          yq="docker run --rm -i -v ${PWD}:${PWD} -w ${PWD} mikefarah/yq"
+          echo "VERSION=$($yq e '.version' config.yaml)"
+          echo "VERSION=$($yq e '.version' config.yaml)" >> $GITHUB_ENV
+      - name: Prepare Dockerfile
+        run: |
+          sed -i "s/ARG OZRIC_VERSION=.*/ARG OZRIC_VERSION=${{ env.VERSION }}.${{ github.run_number }}/" Dockerfile
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Publish
         uses: home-assistant/builder@master
         with:
           args: |
@@ -40,11 +63,34 @@ jobs:
             --target . \
             --docker-hub jchown \
             --version ${{ env.VERSION }}
-      # - name: Publish ARM v7
-      #   uses: home-assistant/builder@master
-      #   with:
-      #     args: |
-      #       --armv7 \
-      #       --target . \
-      #       --docker-hub jchown
-      #       --version ${{ env.VERSION }}
+
+  publish-armv7:
+    name: Publish ARM v7
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+        with:
+          submodules: 'true'
+      - name: Read version
+        run: |
+          yq="docker run --rm -i -v ${PWD}:${PWD} -w ${PWD} mikefarah/yq"
+          echo "VERSION=$($yq e '.version' config.yaml)"
+          echo "VERSION=$($yq e '.version' config.yaml)" >> $GITHUB_ENV
+      - name: Prepare Dockerfile
+        run: |
+          sed -i "s/ARG OZRIC_VERSION=.*/ARG OZRIC_VERSION=${{ env.VERSION }}.${{ github.run_number }}/" Dockerfile
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Publish
+        uses: home-assistant/builder@master
+        with:
+          args: |
+            --armv7 \
+            --target . \
+            --docker-hub jchown
+            --version ${{ env.VERSION }}
+            

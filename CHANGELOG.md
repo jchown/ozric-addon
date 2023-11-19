@@ -1,6 +1,11 @@
 # Changelog
 
-## 0.10.20 - 23
+## 0.11.0
+
+- Removed HomeHub
+- Re-enable ARM v7
+
+## 0.10.20 - 25
 
 - More _blazor wrangling
 
