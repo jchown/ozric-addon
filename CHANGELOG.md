@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.1
+
+- Extra handling for missing devices
+
 ## 0.11.0
 
 - Removed HomeHub
