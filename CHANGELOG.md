@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.2
+
+- Alerts
+
 ## 0.11.1
 
 - Extra handling for missing devices
