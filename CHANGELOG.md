@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.3
+
+- Allow day phases to be re-ordered
+- Fix to add new modes to mode switch
+- Fix for mode switch mode editor
+
 ## 0.11.2
 
 - Alerts
