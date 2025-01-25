@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.4
+
+- Don't throw if an output is disconnected
+
 ## 0.11.3
 
 - Allow day phases to be re-ordered
