@@ -1,96 +1,65 @@
 name: "Publish"
 
-on: push
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
 
 jobs:
-
-  publish-x64:
-    name: Publish AMD64
+  read-version:
+    name: Read version
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.v.outputs.version }}
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v3
+      - name: Check out the repository
+        uses: actions/checkout@v6.0.2
         with:
           submodules: 'true'
-      - name: Read version
+
+      - name: Read version from config.yaml
+        id: v
         run: |
           yq="docker run --rm -i -v ${PWD}:${PWD} -w ${PWD} mikefarah/yq"
-          echo "VERSION=$($yq e '.version' config.yaml)"
-          echo "VERSION=$($yq e '.version' config.yaml)" >> $GITHUB_ENV
-      - name: Prepare Dockerfile
-        run: |
-          sed -i "s/ARG OZRIC_VERSION=.*/ARG OZRIC_VERSION=${{ env.VERSION }}.${{ github.run_number }}/" Dockerfile
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Publish
-        uses: home-assistant/builder@master
-        with:
-          args: |
-            --amd64 \
-            --target . \
-            --docker-hub jchown \
-            --version ${{ env.VERSION }}
+          version="$($yq e '.version' config.yaml).${{ github.run_number }}"
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
 
-  publish-arm64:
-    name: Publish AArch64
+  build:
+    name: Build ${{ matrix.arch }}
+    needs: read-version
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # armv7 not supported, see https://github.com/home-assistant/builder/issues/158
+        # i386 / armhf not supported by dotnet, see https://docs.microsoft.com/en-us/dotnet/core/rid-catalog
+        arch: [amd64, aarch64]
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v3
+      - name: Check out the repository
+        uses: actions/checkout@v6.0.2
         with:
           submodules: 'true'
-      - name: Read version
-        run: |
-          yq="docker run --rm -i -v ${PWD}:${PWD} -w ${PWD} mikefarah/yq"
-          echo "VERSION=$($yq e '.version' config.yaml)"
-          echo "VERSION=$($yq e '.version' config.yaml)" >> $GITHUB_ENV
-      - name: Prepare Dockerfile
-        run: |
-          sed -i "s/ARG OZRIC_VERSION=.*/ARG OZRIC_VERSION=${{ env.VERSION }}.${{ github.run_number }}/" Dockerfile
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Publish
-        uses: home-assistant/builder@master
-        with:
-          args: |
-            --aarch64 \
-            --target . \
-            --docker-hub jchown \
-            --version ${{ env.VERSION }}
+          persist-credentials: false
 
-  # publish-armv7:
-  #   name: Publish ARM v7
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout the repository
-  #       uses: actions/checkout@v3
-  #       with:
-  #         submodules: 'true'
-  #     - name: Read version
-  #       run: |
-  #         yq="docker run --rm -i -v ${PWD}:${PWD} -w ${PWD} mikefarah/yq"
-  #         echo "VERSION=$($yq e '.version' config.yaml)"
-  #         echo "VERSION=$($yq e '.version' config.yaml)" >> $GITHUB_ENV
-  #     - name: Prepare Dockerfile
-  #       run: |
-  #         sed -i "s/ARG OZRIC_VERSION=.*/ARG OZRIC_VERSION=${{ env.VERSION }}.${{ github.run_number }}/" Dockerfile
-  #     - name: Login to DockerHub
-  #       uses: docker/login-action@v2
-  #       with:
-  #         username: ${{ secrets.DOCKERHUB_USERNAME }}
-  #         password: ${{ secrets.DOCKERHUB_TOKEN }}
-  #     - name: Publish
-  #       uses: home-assistant/builder@master
-  #       with:
-  #         args: |
-  #           --armv7 \
-  #           --target . \
-  #           --docker-hub jchown
-  #           --version ${{ env.VERSION }}
-            
+      - name: Build and push image
+        uses: home-assistant/builder/actions/build-image@2026.03.2
+        with:
+          arch: ${{ matrix.arch }}
+          context: .
+          image: docker.io/jchown/${{ matrix.arch }}-ozric-addon
+          image-tags: |
+            ${{ needs.read-version.outputs.version }}
+            latest
+          version: ${{ needs.read-version.outputs.version }}
+          push: true
+          container-registry: docker.io
+          container-registry-username: ${{ secrets.DOCKERHUB_USERNAME }}
+          container-registry-password: ${{ secrets.DOCKERHUB_TOKEN }}
+          labels: |
+            io.hass.type=addon
+            io.hass.name=Ozric
+            io.hass.description=Continuous graph-based automation engine
+            io.hass.url=https://github.com/jchown/ozric-addon

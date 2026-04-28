@@ -3,7 +3,7 @@
 ## 0.12.0
 
 - Large refactoring to make UX areas/room oriented
-- Size independent layout 
+- Size independent coordinates for layout 
 - Upgrade of dependencies
   - .NET 9
   - MudBlazor 8
