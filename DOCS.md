@@ -8,7 +8,7 @@ Ozric is a an automation engine for Home Assistant, that uses a [graph](#graph) 
 
 ## <a name="graph" /> The Graph
 
-![a picture of an Ozric graph](docs/graph.png "Ozric Graph")
+![an animation of a running Ozric graph](docs/running.gif "Ozric Graph")
 
 The graph is the top-level entity in Ozric.
 

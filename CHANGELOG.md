@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.12.0
+
+- Large refactoring to make UX areas/room oriented
+- Size independent layout 
+- Upgrade of dependencies
+  - .NET 9
+  - MudBlazor 8
+  - Blazor Diagrams 3
+
 ## 0.11.4
 
 - Don't throw if an output is disconnected

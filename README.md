@@ -11,7 +11,7 @@ Ozric is currently [alpha](https://en.wikipedia.org/wiki/Software_release_life_c
 By continuously monitoring the states of your various sensors, switches and the environment, Ozric can turn on and off your lights in a very customisable and reactive way.
 This logic is customisable and described by a graph, which you can edit visually.
 
-![a picture of an Ozric graph](docs/graph.png "Ozric Graph")
+![an animation of a running Ozric graph](docs/running.gif "Ozric Graph")
 
 This is very similar to [Node Red](https://nodered.org/), but Ozric is not message-oriented and doesn't need knowledge of YAML. Instead it is entirely GUI based;
 the graph is continuously evaluated and responds to internal (computed) state changes as well as sensor changes.
