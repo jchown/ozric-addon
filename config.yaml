@@ -17,7 +17,7 @@ schema:
   logging: list(Error|Warning|Info|Debug|Trace)
 homeassistant_api: true
 ingress: true
-image: "jchown/{arch}-ozric-addon"
+image: "jchown/ozric-addon"
 ports:
   8099/tcp: 8099
 hassio_api: true

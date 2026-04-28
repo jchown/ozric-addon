@@ -8,12 +8,21 @@ on:
 permissions:
   contents: read
 
+env:
+  REGISTRY_PREFIX: docker.io/jchown
+  IMAGE_NAME: ozric-addon
+  # armv7 not supported, see https://github.com/home-assistant/builder/issues/158
+  # i386 / armhf not supported by dotnet, see https://docs.microsoft.com/en-us/dotnet/core/rid-catalog
+  ARCHITECTURES: '["amd64","aarch64"]'
+
 jobs:
-  read-version:
-    name: Read version
+  prepare:
+    name: Prepare
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.v.outputs.version }}
+      tag: ${{ steps.v.outputs.tag }}
+      build_version: ${{ steps.v.outputs.build_version }}
+      matrix: ${{ steps.matrix.outputs.matrix }}
     steps:
       - name: Check out the repository
         uses: actions/checkout@v6.0.2
@@ -24,25 +33,25 @@ jobs:
         id: v
         run: |
           yq="docker run --rm -i -v ${PWD}:${PWD} -w ${PWD} mikefarah/yq"
-          version="$($yq e '.version' config.yaml).${{ github.run_number }}"
-          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          tag="$($yq e '.version' config.yaml)"
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+          echo "build_version=${tag}.${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+
+      - name: Prepare build matrix
+        id: matrix
+        uses: home-assistant/builder/actions/prepare-multi-arch-matrix@2026.03.2
+        with:
+          architectures: ${{ env.ARCHITECTURES }}
+          image-name: ${{ env.IMAGE_NAME }}
+          registry-prefix: ${{ env.REGISTRY_PREFIX }}
 
   build:
     name: Build ${{ matrix.arch }}
-    needs: read-version
+    needs: prepare
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
-      matrix:
-        # armv7 not supported, see https://github.com/home-assistant/builder/issues/158
-        # i386 / armhf not supported by dotnet, see https://docs.microsoft.com/en-us/dotnet/core/rid-catalog
-        # The build-image action does not pass --platform to buildx, so each
-        # architecture builds on a runner whose native platform matches the target.
-        include:
-          - arch: amd64
-            os: ubuntu-latest
-          - arch: aarch64
-            os: ubuntu-24.04-arm
+      matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}
     steps:
       - name: Check out the repository
         uses: actions/checkout@v6.0.2
@@ -55,11 +64,11 @@ jobs:
         with:
           arch: ${{ matrix.arch }}
           context: .
-          image: docker.io/jchown/${{ matrix.arch }}-ozric-addon
+          image: ${{ matrix.image }}
           image-tags: |
-            ${{ needs.read-version.outputs.version }}
+            ${{ needs.prepare.outputs.tag }}
             latest
-          version: ${{ needs.read-version.outputs.version }}
+          version: ${{ needs.prepare.outputs.build_version }}
           push: true
           # Cosign signing is on by default but requires OIDC; disable for now.
           cosign: false
@@ -71,3 +80,23 @@ jobs:
             io.hass.name=Ozric
             io.hass.description=Continuous graph-based automation engine
             io.hass.url=https://github.com/jchown/ozric-addon
+
+  manifest:
+    name: Publish multi-arch manifest
+    needs: [prepare, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish multi-arch manifest
+        uses: home-assistant/builder/actions/publish-multi-arch-manifest@2026.03.2
+        with:
+          architectures: ${{ env.ARCHITECTURES }}
+          image-name: ${{ env.IMAGE_NAME }}
+          image-tags: |
+            ${{ needs.prepare.outputs.tag }}
+            latest
+          registry-prefix: ${{ env.REGISTRY_PREFIX }}
+          # Cosign signing is on by default but requires OIDC; disable for now.
+          cosign: false
+          container-registry: docker.io
+          container-registry-username: ${{ secrets.DOCKERHUB_USERNAME }}
+          container-registry-password: ${{ secrets.DOCKERHUB_TOKEN }}
