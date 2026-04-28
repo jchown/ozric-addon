@@ -31,7 +31,7 @@ RUN dotnet publish -c Release -r ${runtime} --self-contained /src/Ozric.Dashboar
 
 FROM ghcr.io/home-assistant/${BUILD_ARCH}-base:latest
 RUN apk add --no-cache \
-    openssh libunwind \
+    git openssh libunwind \
     nghttp2-libs libidn krb5-libs libuuid lttng-ust zlib \
     libstdc++ libintl \
     icu
