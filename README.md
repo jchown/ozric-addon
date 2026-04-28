@@ -1,6 +1,6 @@
 # Ozric Addon for Home Assistant
 
-This is an [add on](https://www.home-assistant.io/addons/) for [Home Assistant](https://www.home-assistant.io/).
+This is an [app](https://www.home-assistant.io/apps/) for [Home Assistant](https://www.home-assistant.io/).
 
 ## Status
 
