@@ -30,13 +30,19 @@ jobs:
   build:
     name: Build ${{ matrix.arch }}
     needs: read-version
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         # armv7 not supported, see https://github.com/home-assistant/builder/issues/158
         # i386 / armhf not supported by dotnet, see https://docs.microsoft.com/en-us/dotnet/core/rid-catalog
-        arch: [amd64, aarch64]
+        # The build-image action does not pass --platform to buildx, so each
+        # architecture builds on a runner whose native platform matches the target.
+        include:
+          - arch: amd64
+            os: ubuntu-latest
+          - arch: aarch64
+            os: ubuntu-24.04-arm
     steps:
       - name: Check out the repository
         uses: actions/checkout@v6.0.2
@@ -55,6 +61,8 @@ jobs:
             latest
           version: ${{ needs.read-version.outputs.version }}
           push: true
+          # Cosign signing is on by default but requires OIDC; disable for now.
+          cosign: false
           container-registry: docker.io
           container-registry-username: ${{ secrets.DOCKERHUB_USERNAME }}
           container-registry-password: ${{ secrets.DOCKERHUB_TOKEN }}
