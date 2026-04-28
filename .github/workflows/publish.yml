@@ -76,7 +76,7 @@ jobs:
           container-registry-username: ${{ secrets.DOCKERHUB_USERNAME }}
           container-registry-password: ${{ secrets.DOCKERHUB_TOKEN }}
           labels: |
-            io.hass.type=addon
+            io.hass.type=app
             io.hass.name=Ozric
             io.hass.description=Continuous graph-based automation engine
             io.hass.url=https://github.com/jchown/ozric-addon
