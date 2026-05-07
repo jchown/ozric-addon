@@ -28,10 +28,9 @@ Ozric is compatible with [HA OS](https://github.com/home-assistant/operating-sys
 
 ## How To Install It
 
-* Go to the Add Ons repository in your Home Assistant [Add-On Dashboard](http://homeassistant:8123/hassio/dashboard).
-* Click on the link at the bottom right to go to the Add On Store.
-* From there click "Repositories" in the top right and add the URL [https://github.com/jchown/ozric-addon](https://github.com/jchown/ozric-addon).
-* The add-on will then be available to install in the main Add-On Dashboard.
+* Go to the [Apps Repositories](http://homeassistant.local:8123/config/apps/repositories) in your Home Assistant instance.
+* Click on the link at the bottom right to Add a repository and add the URL [https://github.com/jchown/ozric-addon](https://github.com/jchown/ozric-addon).
+* The app will then be available to install in the main [list of Apps](http://homeassistant.local:8123/config/apps/available), probably near the bottom.
 
 ## Privacy & Telemetry
 
