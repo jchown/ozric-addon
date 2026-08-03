@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.12.2
+
+- Updated dependencies to hide CVE warnings
+
+## 0.12.1
+
+- Main loop monitoring
+- Exception recording
+
 ## 0.12.0
 
 - Large refactoring to make UX areas/room oriented
