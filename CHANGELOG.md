@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.12.3
+
+- Fix connections being recreated from stale errors
+
 ## 0.12.2
 
 - Updated dependencies to hide CVE warnings
