@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.12.4
+
+- Another connection bug fix
+- Guard for missing mappings
+
 ## 0.12.3
 
 - Fix connections being recreated from stale errors
